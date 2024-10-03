@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5000;
 const encryp=process.env.encryp
 app.use('/student',router)
 app.use('/Teacher',router)
+app.use('/attendence',router)
 mongoose.connect("mongodb+srv://new_user11:newuser11@custmer.vocvmkz.mongodb.net/").then(()=>{
     console.log("mongodb conneted");
     app.listen(PORT,()=>{

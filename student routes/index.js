@@ -62,4 +62,23 @@ router.delete('/del/:id',async (req, res) =>{
         res.send(error);
     }
 });
+router.post("/m",async (req, res) =>{
+    try{
+       
+        const attendence = Attendence(req.body);
+        await attendence.save();
+        res.send("attendence created successfully");
+    } catch(error){
+        res.send(error);  
+    }
+});
+router.get("/hello",async (req, res) =>{
+    try{
+        const attendence = await Attendence.find();
+        res.send(attendence);
+    } catch(error){
+        res.send(error)  
+    
+    }
+});
 export default router;
