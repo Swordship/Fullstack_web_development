@@ -1,5 +1,6 @@
 import {Router,request,response} from "express";
-import Student from "../../model/student.js";
+import Student from "../../model/Student.js";
+import Teacher from "../../model/Teacher.js";
 const router = Router();
 router.post("/a",async (req, res) =>{
     try{
@@ -21,4 +22,22 @@ router.get("/h",async (req, res) =>{
     
     }
 });
+router.post('/tes/',async (req, res) =>{
+    try{
+       
+        const teacher = Teacher(req.body);
+        await teacher.save();
+        res.send("Teacher created successfully");
+    } catch(error){
+        res.send(error);  
+}
+})
+
+router.get('/get/:id',async (req, res) =>{
+    try{
+        const teacher = await Teacher.findById(req.params.id);
+        res.send(teacher);
+    } catch(error){
+        res.send(error);
+}});
 export default router;
