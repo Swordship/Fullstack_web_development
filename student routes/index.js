@@ -40,4 +40,26 @@ router.get('/get/:id',async (req, res) =>{
     } catch(error){
         res.send(error);
 }});
+router.put('/up/:id',async (req, res) =>{
+    try {
+        const teacher = await Teacher.findByIdAndUpdate(req.params.id, req.body,{
+            new: true,
+            runvalidate:true}
+
+        );
+        res.send("teacher updated successfully");if(!teacher)res.status(404).send("teacher not found")
+    } catch (error) {
+        res.send(error);
+    }
+});
+router.delete('/del/:id',async (req, res) =>{
+    try {
+        const teacher = await Teacher.findByIdAndDelete(req.params.id
+
+        );
+        res.send("teacher deleted successfully");if(!teacher)res.status(404).send("teacher not found")
+    } catch (error) {
+        res.send(error);
+    }
+});
 export default router;
