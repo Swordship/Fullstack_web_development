@@ -1,6 +1,7 @@
 import {Router,request,response} from "express";
 import Student from "../../model/Student.js";
 import Teacher from "../../model/Teacher.js";
+import Attendence from "../model/attendence.js";
 const router = Router();
 router.post("/a",async (req, res) =>{
     try{
@@ -81,4 +82,27 @@ router.get("/hello",async (req, res) =>{
     
     }
 });
+router.put("/puts/:id", async (req , res) => {
+    try {
+      const attendence = await Attendence.findByIdAndUpdate(
+        req.params.id, req.body, 
+        { new: true, runValidators: true });
+      if (!attendence)
+        {return res.send( 'attendence not found' )};
+      res.send('update successfully')
+       
+    } catch (error) {
+        res.send(error);
+    }
+  });
+  router.delete('/custs/:id', async (req, res) => {
+    try {
+      const attendence = await Attendence.findByIdAndDelete(req.params.id);
+      if (!attendence){ return res.send( 'attendece not found')};
+      res.send(attendence)
+      
+    } catch (error) {
+         res.send(error)
+    }
+  });
 export default router;
